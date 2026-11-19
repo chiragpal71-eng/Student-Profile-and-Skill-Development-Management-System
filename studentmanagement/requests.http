@@ -1,0 +1,105 @@
+@baseUrl = http://localhost:8080/api/students
+
+### 1. Add Student 1 (Excellent - Stronger in Programming)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "studentId": "S101",
+  "studentName": "Aarav Sharma",
+  "email": "aarav@example.com",
+  "courseName": "CSE",
+  "programmingScore": 92.0,
+  "mathematicsScore": 88.0,
+  "technicalSkills": ["Java", "Spring Boot", "MySQL"]
+}
+
+### 2. Add Student 2 (Weak in Programming < 50, Strong in Math >= 75)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "studentId": "S102",
+  "studentName": "Priya Verma",
+  "email": "priya@example.com",
+  "courseName": "CSEAI",
+  "programmingScore": 42.0,
+  "mathematicsScore": 84.0,
+  "technicalSkills": ["Python", "Java"]
+}
+
+### 3. Add Student 3 (Good - Equal Scores)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "studentId": "S103",
+  "studentName": "Rohan Gupta",
+  "email": "rohan@example.com",
+  "courseName": "CSE",
+  "programmingScore": 76.0,
+  "mathematicsScore": 76.0,
+  "technicalSkills": ["MySQL", "React"]
+}
+
+### 4. Test Validation: Duplicate Student ID (Should return 400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "studentId": "S101",
+  "studentName": "Duplicate User",
+  "email": "dup@example.com",
+  "courseName": "IT",
+  "programmingScore": 80.0,
+  "mathematicsScore": 80.0,
+  "technicalSkills": ["C++"]
+}
+
+### 5. Test Validation: Invalid Score > 100 (Should return 400 Bad Request)
+POST {{baseUrl}}
+Content-Type: application/json
+
+{
+  "studentId": "S104",
+  "studentName": "Invalid Score User",
+  "email": "invalid@example.com",
+  "courseName": "IT",
+  "programmingScore": 105.0,
+  "mathematicsScore": 70.0,
+  "technicalSkills": ["Java"]
+}
+
+### 6. Retrieve All Students
+GET {{baseUrl}}
+
+### 7. Search Student by ID
+GET {{baseUrl}}/S101
+
+### 8. Search Student by Email
+GET {{baseUrl}}/search/email?email=priya@example.com
+
+### 9. Search Students by Course
+GET {{baseUrl}}/search/course?course=CSE
+
+### 10. Display Merit List (Sorted by Average Score Descending)
+GET {{baseUrl}}/merit-list
+
+### 11. Identify Students with Same Technical Skills
+GET {{baseUrl}}/shared-skills
+
+### 12. Display Weak Programming (< 50) & Strong Math (>= 75) Students
+GET {{baseUrl}}/weak-programming-strong-math
+
+### 13. Update Student Scores and Skills
+PUT {{baseUrl}}/S102
+Content-Type: application/json
+
+{
+  "programmingScore": 78.0,
+  "mathematicsScore": 85.0,
+  "technicalSkills": ["Python", "Java", "Docker"]
+}
+
+### 14. Delete a Student Record
+DELETE {{baseUrl}}/S101
